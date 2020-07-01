@@ -1,11 +1,9 @@
-package com.ashiqurrahman.daterangepickerdialog.library
+package com.ashiqurrahman.rangedtimepickerdialog.library
 
 import android.os.Build
 import android.widget.TimePicker
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.ashiqurrahman.daterangepickerdialog.R
-import kotlin.math.min
+import com.ashiqurrahman.rangedtimepickerdialog.R
 
 
 /*

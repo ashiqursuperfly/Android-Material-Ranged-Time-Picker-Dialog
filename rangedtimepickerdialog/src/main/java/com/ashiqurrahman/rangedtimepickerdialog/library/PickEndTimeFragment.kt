@@ -1,9 +1,10 @@
-package com.ashiqurrahman.daterangepickerdialog.library
+package com.ashiqurrahman.rangedtimepickerdialog.library
 
 import android.os.Build
 import android.widget.TimePicker
 import androidx.lifecycle.ViewModelProviders
-import com.ashiqurrahman.daterangepickerdialog.R
+import com.ashiqurrahman.rangedtimepickerdialog.R
+
 
 /*
  * Created by : 

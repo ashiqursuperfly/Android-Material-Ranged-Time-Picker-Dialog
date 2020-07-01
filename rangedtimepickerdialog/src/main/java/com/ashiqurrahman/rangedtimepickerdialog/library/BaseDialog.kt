@@ -1,9 +1,9 @@
-package com.ashiqurrahman.daterangepickerdialog.library
+package com.ashiqurrahman.rangedtimepickerdialog.library
 
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.DialogFragment
-import com.ashiqurrahman.daterangepickerdialog.R
+import com.ashiqurrahman.rangedtimepickerdialog.R
 
 
 /*
@@ -39,7 +39,7 @@ abstract class BaseDialog: DialogFragment() {
         val window: Window? = dialog?.window
         window?.setLayout(
             ViewGroup.LayoutParams.MATCH_PARENT,
-            activity!!.resources.getDimensionPixelSize(R.dimen.dialog_height)
+            activity!!.resources.getDimensionPixelSize(R.dimen.ranged_time_picker_dialog_height)
         )
         window?.setGravity(Gravity.CENTER)
     }

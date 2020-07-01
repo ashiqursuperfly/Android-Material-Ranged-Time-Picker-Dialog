@@ -2,7 +2,7 @@ package com.ashiqurrahman.daterangepickerdialog
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.ashiqurrahman.daterangepickerdialog.library.TimeRangePickerDialog
+import com.ashiqurrahman.rangedtimepickerdialog.library.TimeRangePickerDialog
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

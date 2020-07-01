@@ -1,11 +1,11 @@
-package com.ashiqurrahman.daterangepickerdialog.library
+package com.ashiqurrahman.rangedtimepickerdialog.library
 
 import android.view.LayoutInflater
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.ViewPager
-import com.ashiqurrahman.daterangepickerdialog.R
+import com.ashiqurrahman.rangedtimepickerdialog.R
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.textview.MaterialTextView

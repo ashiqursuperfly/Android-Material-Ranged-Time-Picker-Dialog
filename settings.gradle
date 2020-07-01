@@ -1,2 +1,3 @@
 rootProject.name='DateRangePickerDialog'
 include ':app'
+include ':rangedtimepickerdialog'

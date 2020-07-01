@@ -1,4 +1,4 @@
-package com.ashiqurrahman.daterangepickerdialog.library
+package com.ashiqurrahman.rangedtimepickerdialog.library
 
 import android.content.Context
 import android.os.Bundle
