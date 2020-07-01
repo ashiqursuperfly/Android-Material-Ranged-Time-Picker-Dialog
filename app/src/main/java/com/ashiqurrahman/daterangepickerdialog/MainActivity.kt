@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
                     endHour: Int,
                     endMinute: Int
                 ) {
-                    val str = ":${startMinute} ${endHour}:${endMinute}"
+                    val str = "${startHour}:${startMinute} ${endHour}:${endMinute}"
                     text_view.text = str
                 }
 

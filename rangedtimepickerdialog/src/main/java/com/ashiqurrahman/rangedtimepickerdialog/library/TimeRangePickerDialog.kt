@@ -61,17 +61,20 @@ class TimeRangePickerDialog(
             ) {}
 
             override fun onPageSelected(newPosition: Int) {
-                val selectedTv = tabLayout.getTabAt(newPosition)?.customView?.findViewById<MaterialTextView>(R.id.tv_time)
-                val disabledTv = tabLayout.getTabAt((newPosition + 1)% sectionsPagerAdapter.count)?.customView?.findViewById<MaterialTextView>(R.id.tv_time)
+                val selectedTimeTv = tabLayout.getTabAt(newPosition)?.customView?.findViewById<MaterialTextView>(R.id.tv_time)
+                val selectedTitleTv = tabLayout.getTabAt(newPosition)?.customView?.findViewById<MaterialTextView>(R.id.tv_title)
+                val disabledTimeTv = tabLayout.getTabAt((newPosition + 1)% sectionsPagerAdapter.count)?.customView?.findViewById<MaterialTextView>(R.id.tv_time)
+                val disabledTitleTv = tabLayout.getTabAt((newPosition + 1)% sectionsPagerAdapter.count)?.customView?.findViewById<MaterialTextView>(R.id.tv_title)
 
-                selectedTv?.setTextColor(ContextCompat.getColor(requireContext(), R.color.colorAccent))
-                disabledTv?.setTextColor(ContextCompat.getColor(requireContext(), R.color.colorDisabled))
+                selectedTitleTv?.setTextColor(ContextCompat.getColor(requireContext(), R.color.colorAccent))
+                selectedTimeTv?.setTextColor(ContextCompat.getColor(requireContext(), android.R.color.black))
+
+                disabledTimeTv?.setTextColor(ContextCompat.getColor(requireContext(), R.color.colorDisabled))
+                disabledTitleTv?.setTextColor(ContextCompat.getColor(requireContext(), R.color.colorDisabled))
 
             }
         }
         )
-
-
         tabLayout.setupWithViewPager(viewPager)
 
         val btnOk = mRootView.findViewById<MaterialButton>(R.id.btn_ok)

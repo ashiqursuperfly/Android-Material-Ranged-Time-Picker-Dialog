@@ -66,7 +66,10 @@ class PagerAdapter(fm: FragmentManager)
 
         val time = v.findViewById(R.id.tv_time) as MaterialTextView
         time.text = text
-        if(idx == 0)time.setTextColor(ContextCompat.getColor(context, R.color.colorAccent))
+        if(idx == 0){
+            title.setTextColor(ContextCompat.getColor(context, R.color.colorAccent))
+            time.setTextColor(ContextCompat.getColor(context, android.R.color.black))
+        }
         return v
     }
 }
