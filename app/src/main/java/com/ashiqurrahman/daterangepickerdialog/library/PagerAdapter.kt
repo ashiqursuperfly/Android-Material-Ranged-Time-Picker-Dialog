@@ -1,6 +1,10 @@
-package com.ashiqurrahman.daterangepickerdialog.base
+package com.ashiqurrahman.daterangepickerdialog.library
 
+import android.R
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -14,8 +18,6 @@ import androidx.viewpager.widget.ViewPager
 
 class PagerAdapter(fm: FragmentManager)
     : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
-
-    val TAB_TITLES = arrayOf("Start\n12:00AM", "End\n16:45")
 
     interface FragmentViewPagerLifecycle {
         fun onResumeFragment()
@@ -49,10 +51,6 @@ class PagerAdapter(fm: FragmentManager)
         Log.d(this.javaClass.simpleName,"Error! ViewPager Adapter with unknown position:$position")
         return PickStartTimeFragment()
 
-    }
-
-    override fun getPageTitle(position: Int): CharSequence? {
-        return TAB_TITLES[position]
     }
 
     override fun getCount(): Int {

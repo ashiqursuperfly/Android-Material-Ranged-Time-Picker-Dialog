@@ -1,4 +1,4 @@
-package com.ashiqurrahman.daterangepickerdialog.base
+package com.ashiqurrahman.daterangepickerdialog.library
 
 import android.content.Context
 import android.os.Bundle
@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.google.android.material.appbar.MaterialToolbar
 
 /*
  * Created by : 
@@ -14,13 +13,18 @@ import com.google.android.material.appbar.MaterialToolbar
 */
 abstract class BaseFragment: Fragment(), View.OnClickListener {
 
+    lateinit var rootView: View
+    private var mContext: Context? = null
+
     abstract fun getLayoutId(): Int
 
     abstract fun afterOnViewCreated()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        return inflater.inflate(getLayoutId(), container, false)
+        rootView =  inflater.inflate(getLayoutId(), container, false)
+
+        return rootView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -34,8 +38,6 @@ abstract class BaseFragment: Fragment(), View.OnClickListener {
     fun setClickListener(vararg views: View) {
         views.forEach { view -> view.setOnClickListener(this) }
     }
-
-    private var mContext: Context? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

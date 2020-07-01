@@ -1,4 +1,4 @@
-package com.ashiqurrahman.daterangepickerdialog.base
+package com.ashiqurrahman.daterangepickerdialog.library
 
 import android.os.Bundle
 import android.view.*

@@ -2,7 +2,7 @@ package com.ashiqurrahman.daterangepickerdialog
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.ashiqurrahman.daterangepickerdialog.base.PickTimeRangeDialog
+import com.ashiqurrahman.daterangepickerdialog.library.TimeRangePickerDialog
 
 class MainActivity : AppCompatActivity() {
 
@@ -10,7 +10,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val d = PickTimeRangeDialog()
+        val d = TimeRangePickerDialog()
         d.isCancelable = false
         d.show(supportFragmentManager, "")
     }
