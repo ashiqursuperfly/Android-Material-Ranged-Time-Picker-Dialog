@@ -103,9 +103,10 @@ class TimeRangePickerDialog(
     }
 
     private fun postSelectedTimeToTab(selected: Int, time: Pair<Int, Int>) {
-        val hr = if (time.first < 10) "0${time.first}" else "${time.first}"
+        /*val hr = if (time.first < 10) "0${time.first}" else "${time.first}"
         val min = if (time.second < 10) "0${time.second}" else "${time.second}"
-        val timeText = "$hr:$min"
+        val timeText = "$hr:$min"*/
+        val timeText = TimeFormatter.getFormattedTime(time.first, time.second, is24HourView)
         val selectedTab = tabLayout.getTabAt(selected)
         if (selectedTab?.customView == null) {
             selectedTab?.customView = sectionsPagerAdapter.createTabCustomView(

@@ -21,15 +21,14 @@ class PickStartTimeFragment : BaseFragment(), PagerAdapter.FragmentViewPagerLife
     }
 
     override fun afterOnViewCreated() {
-        sharedViewModel =
-            requireActivity().let { ViewModelProviders.of(it).get(SharedViewModel::class.java) }
+        sharedViewModel = requireActivity().let { ViewModelProviders.of(it).get(SharedViewModel::class.java) }
         val tp = rootView.findViewById<TimePicker>(R.id.time_picker)
 
         sharedViewModel.is24HourFormat.observe(viewLifecycleOwner,
             Observer {
                 tp.setIs24HourView(it)
-            })
-
+            }
+        )
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             sharedViewModel.startTimeLiveData.postValue(Pair(tp.hour, tp.minute))
