@@ -1,0 +1,27 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar.Bridge">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+
+    /*--------- FullScreen Dialog theme --------*/
+    <style name="FullScreenDialogStyle" parent="Theme.MaterialComponents.Dialog.Alert">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textColorPrimary">@android:color/black</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowIsFloating">true</item>
+
+        <!-- This is important! Don't forget to set window background -->
+<!--        <item name="android:windowBackground">@android:color/white</item>-->
+    </style>
+
+
+</resources>

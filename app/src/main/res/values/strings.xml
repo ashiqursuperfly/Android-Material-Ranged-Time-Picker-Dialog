@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">DateRangePickerDialog</string>
+    <string name="label_cancel">Cancel</string>
+    <string name="label_ok">Ok</string>
+</resources>
