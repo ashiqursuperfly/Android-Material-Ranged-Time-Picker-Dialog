@@ -16,13 +16,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 app:layout_constraintTop_toTopOf="parent"
-                app:tabTextAppearance="@style/TextAppearance.AppCompat.Medium"
-                app:tabIndicatorHeight="3dp"
-                app:tabIndicatorFullWidth="true"
                 app:tabIndicatorGravity="bottom"
-                app:tabIndicatorColor="@color/colorAccent"
-                app:tabBackground="@android:color/white"
-                app:tabTextColor="@color/colorAccent"/>
+                app:tabBackground="@android:color/white"/>
 
         </androidx.viewpager.widget.ViewPager>
 

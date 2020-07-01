@@ -1,7 +1,6 @@
 package com.ashiqurrahman.rangedtimepickerdialog.library
 
-import android.view.LayoutInflater
-import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.ViewPager
@@ -32,29 +31,11 @@ class TimeRangePickerDialog(
 
     private fun observeData() {
         sharedViewModel.startTimeLiveData.observe(viewLifecycleOwner, Observer {
-            val hr = it.first
-            val min = it.second
-            val time = "$hr:$min"
-            val tab = tabLayout.getTabAt(0)
-            if (tab?.customView == null) tab?.customView = getTabCustomView(startLabel,time)
-            else {
-                val view = tab.customView
-                view?.findViewById<MaterialTextView>(R.id.tv_title)?.text = startLabel
-                view?.findViewById<MaterialTextView>(R.id.tv_time)?.text = time
-            }
+            postSelectedTimeToTab(0, it)
         })
 
         sharedViewModel.endTimeLiveData.observe(viewLifecycleOwner, Observer {
-            val hr = it.first
-            val min = it.second
-            val time = "$hr:$min"
-            val tab = tabLayout.getTabAt(1)
-            if(tab?.customView == null)tab?.customView = getTabCustomView(endLabel,time)
-            else {
-                val view = tab.customView
-                view?.findViewById<MaterialTextView>(R.id.tv_title)?.text = endLabel
-                view?.findViewById<MaterialTextView>(R.id.tv_time)?.text = time
-            }
+            postSelectedTimeToTab(1, it)
         })
     }
 
@@ -63,12 +44,34 @@ class TimeRangePickerDialog(
     }
 
     override fun afterOnCreateView() {
+        sharedViewModel = requireActivity().let { ViewModelProviders.of(it).get(SharedViewModel::class.java) }
+
         sectionsPagerAdapter = PagerAdapter(childFragmentManager)
         viewPager = mRootView.findViewById(R.id.view_pager)
+        tabLayout = mRootView.findViewById(R.id.tabs)
         viewPager.adapter = sectionsPagerAdapter
         viewPager.addOnPageChangeListener(sectionsPagerAdapter.getPageChangeListener())
+        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrollStateChanged(state: Int) {}
 
-        tabLayout = mRootView.findViewById(R.id.tabs)
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {}
+
+            override fun onPageSelected(newPosition: Int) {
+                val selectedTv = tabLayout.getTabAt(newPosition)?.customView?.findViewById<MaterialTextView>(R.id.tv_time)
+                val disabledTv = tabLayout.getTabAt((newPosition + 1)% sectionsPagerAdapter.count)?.customView?.findViewById<MaterialTextView>(R.id.tv_time)
+
+                selectedTv?.setTextColor(ContextCompat.getColor(requireContext(), R.color.colorAccent))
+                disabledTv?.setTextColor(ContextCompat.getColor(requireContext(), R.color.colorDisabled))
+
+            }
+        }
+        )
+
+
         tabLayout.setupWithViewPager(viewPager)
 
         val btnOk = mRootView.findViewById<MaterialButton>(R.id.btn_ok)
@@ -76,15 +79,15 @@ class TimeRangePickerDialog(
         btnOk.setOnClickListener {
             if (viewPager.currentItem == 0) {
                 viewPager.setCurrentItem(1, true)
-            }
-            else if (viewPager.currentItem == 1) {
+            } else if (viewPager.currentItem == 1) {
+                // post results
                 val startTime = sharedViewModel.startTimeLiveData.value
                 val endTime = sharedViewModel.endTimeLiveData.value
                 onPickedTimeTime.onPickedTime(
-                    startTime?.first?:0,
-                    startTime?.second?:0,
+                    startTime?.first ?: 0,
+                    startTime?.second ?: 0,
                     endTime?.first ?: 0,
-                    endTime?.second?: 0
+                    endTime?.second ?: 0
                 )
                 dismiss()
             }
@@ -92,19 +95,28 @@ class TimeRangePickerDialog(
         btnCancel.setOnClickListener {
             dismiss()
         }
-
-        sharedViewModel = requireActivity().let { ViewModelProviders.of(it).get(SharedViewModel::class.java) }
         sharedViewModel.is24HourFormat.postValue(is24HourView)
         observeData()
     }
 
-    private fun getTabCustomView(header: String, text: String): View {
-        val v: View = LayoutInflater.from(requireContext()).inflate(R.layout.custom_tab, null)
-        val title = v.findViewById(R.id.tv_title) as MaterialTextView
-        title.text = header
-
-        val time = v.findViewById(R.id.tv_time) as MaterialTextView
-        time.text = text
-        return v
+    private fun postSelectedTimeToTab(selected: Int, time: Pair<Int, Int>) {
+        val hr = if (time.first < 10) "0${time.first}" else "${time.first}"
+        val min = if (time.second < 10) "0${time.second}" else "${time.second}"
+        val timeText = "$hr:$min"
+        val selectedTab = tabLayout.getTabAt(selected)
+        if (selectedTab?.customView == null) {
+            selectedTab?.customView = sectionsPagerAdapter.createTabCustomView(
+                requireContext(),
+                if (selected == 0) startLabel else endLabel,
+                timeText,
+                selected
+            )
+        } else {
+            val selectedView = selectedTab.customView
+            selectedView?.findViewById<MaterialTextView>(R.id.tv_title)?.text = startLabel
+            val selectedTv = selectedView?.findViewById<MaterialTextView>(R.id.tv_time)
+            selectedTv?.text = timeText
+        }
     }
+
 }

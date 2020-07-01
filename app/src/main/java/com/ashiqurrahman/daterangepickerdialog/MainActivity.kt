@@ -12,7 +12,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val d = TimeRangePickerDialog(
-            is24HourView = true,
+            startLabel = "START",
+            endLabel = "END",
+            is24HourView = false,
             onPickedTimeTime = object : TimeRangePickerDialog.OnPickedTimeRangePick {
                 override fun onPickedTime(
                     startHour: Int,
@@ -20,7 +22,7 @@ class MainActivity : AppCompatActivity() {
                     endHour: Int,
                     endMinute: Int
                 ) {
-                    val str = "${startHour}:${startMinute} ${endHour}:${endMinute}"
+                    val str = ":${startMinute} ${endHour}:${endMinute}"
                     text_view.text = str
                 }
 

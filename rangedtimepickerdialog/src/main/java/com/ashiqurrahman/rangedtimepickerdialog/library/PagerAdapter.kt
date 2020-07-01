@@ -1,10 +1,16 @@
 package com.ashiqurrahman.rangedtimepickerdialog.library
 
+import android.content.Context
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager.widget.ViewPager
+import com.ashiqurrahman.rangedtimepickerdialog.R
+import com.google.android.material.textview.MaterialTextView
 
 
 /*
@@ -51,5 +57,16 @@ class PagerAdapter(fm: FragmentManager)
 
     override fun getCount(): Int {
         return 2
+    }
+
+    fun createTabCustomView(context: Context, header: String, text: String, idx: Int): View {
+        val v: View = LayoutInflater.from(context).inflate(R.layout.custom_tab, null)
+        val title = v.findViewById(R.id.tv_title) as MaterialTextView
+        title.text = header
+
+        val time = v.findViewById(R.id.tv_time) as MaterialTextView
+        time.text = text
+        if(idx == 0)time.setTextColor(ContextCompat.getColor(context, R.color.colorAccent))
+        return v
     }
 }

@@ -2,5 +2,5 @@
 <resources>
     <color name="colorPrimary">@android:color/holo_orange_light</color>
     <color name="colorPrimaryDark">@android:color/holo_orange_dark</color>
-    <color name="colorAccent">@android:color/holo_purple</color>
+    <color name="colorAccent">@android:color/holo_orange_light</color>
 </resources>
