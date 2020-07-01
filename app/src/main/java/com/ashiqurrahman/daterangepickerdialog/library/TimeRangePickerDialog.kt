@@ -2,8 +2,6 @@ package com.ashiqurrahman.daterangepickerdialog.library
 
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.viewpager.widget.ViewPager
@@ -18,32 +16,45 @@ import com.google.android.material.textview.MaterialTextView
 */
 
 class TimeRangePickerDialog(
+    var onPickedTimeTime: OnPickedTimeRangePick,
     var startLabel: String = "Start",
     var endLabel: String = "End",
     var is24HourView: Boolean = false
-) : BaseDialog(){
-
+) : BaseDialog() {
     private lateinit var sectionsPagerAdapter: PagerAdapter
     private lateinit var viewPager: ViewPager
     private lateinit var tabLayout: TabLayout
     private lateinit var sharedViewModel: SharedViewModel
 
+    interface OnPickedTimeRangePick {
+        fun onPickedTime(startHour: Int, startMinute: Int, endHour: Int, endMinute: Int)
+    }
+
     private fun observeData() {
         sharedViewModel.startTimeLiveData.observe(viewLifecycleOwner, Observer {
             val hr = it.first
             val min = it.second
-
+            val time = "$hr:$min"
             val tab = tabLayout.getTabAt(0)
-            tab?.customView = getTabCustomView(startLabel,"$hr:$min")
-
+            if (tab?.customView == null) tab?.customView = getTabCustomView(startLabel,time)
+            else {
+                val view = tab.customView
+                view?.findViewById<MaterialTextView>(R.id.tv_title)?.text = startLabel
+                view?.findViewById<MaterialTextView>(R.id.tv_time)?.text = time
+            }
         })
 
         sharedViewModel.endTimeLiveData.observe(viewLifecycleOwner, Observer {
             val hr = it.first
             val min = it.second
-
+            val time = "$hr:$min"
             val tab = tabLayout.getTabAt(1)
-            tab?.customView = getTabCustomView(endLabel,"$hr:$min")
+            if(tab?.customView == null)tab?.customView = getTabCustomView(endLabel,time)
+            else {
+                val view = tab.customView
+                view?.findViewById<MaterialTextView>(R.id.tv_title)?.text = endLabel
+                view?.findViewById<MaterialTextView>(R.id.tv_time)?.text = time
+            }
         })
     }
 
@@ -67,7 +78,14 @@ class TimeRangePickerDialog(
                 viewPager.setCurrentItem(1, true)
             }
             else if (viewPager.currentItem == 1) {
-                // TODO: callback results
+                val startTime = sharedViewModel.startTimeLiveData.value
+                val endTime = sharedViewModel.endTimeLiveData.value
+                onPickedTimeTime.onPickedTime(
+                    startTime?.first?:0,
+                    startTime?.second?:0,
+                    endTime?.first ?: 0,
+                    endTime?.second?: 0
+                )
                 dismiss()
             }
         }
@@ -76,10 +94,11 @@ class TimeRangePickerDialog(
         }
 
         sharedViewModel = requireActivity().let { ViewModelProviders.of(it).get(SharedViewModel::class.java) }
+        sharedViewModel.is24HourFormat.postValue(is24HourView)
         observeData()
     }
 
-    fun getTabCustomView(header: String, text: String): View {
+    private fun getTabCustomView(header: String, text: String): View {
         val v: View = LayoutInflater.from(requireContext()).inflate(R.layout.custom_tab, null)
         val title = v.findViewById(R.id.tv_title) as MaterialTextView
         title.text = header

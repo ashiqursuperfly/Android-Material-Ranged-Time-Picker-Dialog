@@ -10,11 +10,7 @@ import androidx.lifecycle.ViewModel
 */
 
 class SharedViewModel: ViewModel() {
+    val is24HourFormat = MutableLiveData<Boolean>()
     val startTimeLiveData = MutableLiveData<Pair<Int,Int>>()
     val endTimeLiveData = MutableLiveData<Pair<Int,Int>>()
-
-
-
-
-
 }

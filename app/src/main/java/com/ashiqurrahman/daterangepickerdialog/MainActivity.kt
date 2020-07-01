@@ -3,6 +3,7 @@ package com.ashiqurrahman.daterangepickerdialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.ashiqurrahman.daterangepickerdialog.library.TimeRangePickerDialog
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -10,7 +11,20 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val d = TimeRangePickerDialog()
+        val d = TimeRangePickerDialog(
+            onPickedTimeTime = object : TimeRangePickerDialog.OnPickedTimeRangePick {
+                override fun onPickedTime(
+                    startHour: Int,
+                    startMinute: Int,
+                    endHour: Int,
+                    endMinute: Int
+                ) {
+                    val str = "${startHour}:${startMinute} ${endHour}:${endMinute}"
+                    text_view.text = str
+                }
+
+            }
+        )
         d.isCancelable = false
         d.show(supportFragmentManager, "")
     }
