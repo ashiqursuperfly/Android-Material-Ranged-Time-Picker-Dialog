@@ -21,8 +21,7 @@ class PickEndTimeFragment : BaseFragment(), PagerAdapter.FragmentViewPagerLifecy
     }
 
     override fun afterOnViewCreated() {
-        sharedViewModel =
-            requireActivity().let { ViewModelProviders.of(it).get(SharedViewModel::class.java) }
+        sharedViewModel = requireActivity().let { ViewModelProviders.of(it).get(SharedViewModel::class.java) }
 
         val tp = rootView.findViewById<TimePicker>(R.id.time_picker)
 

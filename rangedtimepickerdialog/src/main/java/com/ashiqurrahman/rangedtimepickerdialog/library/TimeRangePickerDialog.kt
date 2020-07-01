@@ -116,7 +116,6 @@ class TimeRangePickerDialog(
             )
         } else {
             val selectedView = selectedTab.customView
-            selectedView?.findViewById<MaterialTextView>(R.id.tv_title)?.text = startLabel
             val selectedTv = selectedView?.findViewById<MaterialTextView>(R.id.tv_time)
             selectedTv?.text = timeText
         }

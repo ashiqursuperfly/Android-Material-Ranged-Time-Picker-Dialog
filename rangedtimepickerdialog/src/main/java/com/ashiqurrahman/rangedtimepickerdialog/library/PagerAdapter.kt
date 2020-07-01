@@ -18,39 +18,40 @@ import com.google.android.material.textview.MaterialTextView
  * <a href="https://www.github.com/ashiqursuperfly">Ashiqur Rahman</a> on 7/1/20.
 */
 
-class PagerAdapter(fm: FragmentManager)
-    : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+class PagerAdapter(fm: FragmentManager) :
+    FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     interface FragmentViewPagerLifecycle {
         fun onResumeFragment()
         fun onPauseFragment()
     }
 
-    private val pageChangeListener: ViewPager.OnPageChangeListener = object : ViewPager.OnPageChangeListener {
-        var currentPosition = 0
-        override fun onPageSelected(newPosition: Int) {
-            val fragmentToShow = getItem(newPosition) as FragmentViewPagerLifecycle
-            fragmentToShow.onResumeFragment()
-            val fragmentToHide = getItem(currentPosition) as FragmentViewPagerLifecycle
-            fragmentToHide.onPauseFragment()
-            currentPosition = newPosition
-        }
+    private val pageChangeListener: ViewPager.OnPageChangeListener =
+        object : ViewPager.OnPageChangeListener {
+            var currentPosition = 0
+            override fun onPageSelected(newPosition: Int) {
+                val fragmentToShow = getItem(newPosition) as FragmentViewPagerLifecycle
+                fragmentToShow.onResumeFragment()
+                val fragmentToHide = getItem(currentPosition) as FragmentViewPagerLifecycle
+                fragmentToHide.onPauseFragment()
+                currentPosition = newPosition
+            }
 
-        override fun onPageScrolled(arg0: Int, arg1: Float, arg2: Int) {}
-        override fun onPageScrollStateChanged(arg0: Int) {}
-    }
+            override fun onPageScrolled(arg0: Int, arg1: Float, arg2: Int) {}
+            override fun onPageScrollStateChanged(arg0: Int) {}
+        }
 
     fun getPageChangeListener(): ViewPager.OnPageChangeListener {
         return pageChangeListener
     }
 
     override fun getItem(position: Int): Fragment {
-        when(position) {
+        when (position) {
             0 -> return PickStartTimeFragment()
             1 -> return PickEndTimeFragment()
         }
 
-        Log.d(this.javaClass.simpleName,"Error! ViewPager Adapter with unknown position:$position")
+        Log.d("RangeTimePicker", "Error! ViewPager Adapter with unknown position:$position")
         return PickStartTimeFragment()
 
     }
@@ -66,7 +67,7 @@ class PagerAdapter(fm: FragmentManager)
 
         val time = v.findViewById(R.id.tv_time) as MaterialTextView
         time.text = text
-        if(idx == 0){
+        if (idx == 0) {
             title.setTextColor(ContextCompat.getColor(context, R.color.colorAccent))
             time.setTextColor(ContextCompat.getColor(context, android.R.color.black))
         }
