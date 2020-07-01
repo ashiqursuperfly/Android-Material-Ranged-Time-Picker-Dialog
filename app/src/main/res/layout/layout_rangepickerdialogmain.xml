@@ -25,4 +25,25 @@
 
         </androidx.viewpager.widget.ViewPager>
 
+    <Button
+        android:id="@+id/btn_ok"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="@string/label_ok"
+        android:layout_marginEnd="8dp"
+        android:background="@android:color/transparent"
+        android:textColor="@color/colorAccent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/view_pager" />
+
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="@string/label_cancel"
+        android:textColor="@color/colorAccent"
+        android:background="@android:color/transparent"
+        app:layout_constraintEnd_toStartOf="@id/btn_ok"
+        app:layout_constraintBottom_toBottomOf="@id/view_pager" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
