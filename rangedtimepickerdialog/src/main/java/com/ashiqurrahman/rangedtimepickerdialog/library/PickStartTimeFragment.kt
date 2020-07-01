@@ -2,6 +2,7 @@ package com.ashiqurrahman.rangedtimepickerdialog.library
 
 import android.os.Build
 import android.widget.TimePicker
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.ashiqurrahman.rangedtimepickerdialog.R
 
@@ -11,7 +12,7 @@ import com.ashiqurrahman.rangedtimepickerdialog.R
  * <a href="https://www.github.com/ashiqursuperfly">Ashiqur Rahman</a> on 7/1/20.
 */
 
-class PickStartTimeFragment: BaseFragment(), PagerAdapter.FragmentViewPagerLifecycle {
+class PickStartTimeFragment : BaseFragment(), PagerAdapter.FragmentViewPagerLifecycle {
 
     private lateinit var sharedViewModel: SharedViewModel
 
@@ -20,26 +21,29 @@ class PickStartTimeFragment: BaseFragment(), PagerAdapter.FragmentViewPagerLifec
     }
 
     override fun afterOnViewCreated() {
-        sharedViewModel = requireActivity().let { ViewModelProviders.of(it).get(SharedViewModel::class.java) }
+        sharedViewModel =
+            requireActivity().let { ViewModelProviders.of(it).get(SharedViewModel::class.java) }
         val tp = rootView.findViewById<TimePicker>(R.id.time_picker)
+
+        sharedViewModel.is24HourFormat.observe(viewLifecycleOwner,
+            Observer {
+                tp.setIs24HourView(it)
+            })
+
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             sharedViewModel.startTimeLiveData.postValue(Pair(tp.hour, tp.minute))
-        }else {
+        } else {
             sharedViewModel.startTimeLiveData.postValue(Pair(tp.currentHour, tp.currentMinute))
         }
-        tp.setOnTimeChangedListener { view, hourOfDay, minute ->
+        tp.setOnTimeChangedListener { _, hourOfDay, minute ->
             val time = Pair(hourOfDay, minute)
             sharedViewModel.startTimeLiveData.postValue(time)
         }
     }
 
-    override fun onResumeFragment() {
-        // Timber.d("Pick Drugs !!. Resume()")
-    }
+    override fun onResumeFragment() {}
 
-    override fun onPauseFragment() {
-        // Timber.d("Pick Drugs !!. Pause()")
-    }
+    override fun onPauseFragment() {}
 
 }

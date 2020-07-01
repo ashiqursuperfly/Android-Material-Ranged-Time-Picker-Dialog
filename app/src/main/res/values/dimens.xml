@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="dialog_height">530dp</dimen>
+    <dimen name="dialog_height">550dp</dimen>
 </resources>

@@ -21,7 +21,7 @@ abstract class BaseDialog: DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // setStyle(STYLE_NO_TITLE, android.R.style.Theme_Material_Light_Dialog_Alert)
+        // setStyle(STYLE_NORMAL, android.R.style.Theme_Material_Light_Dialog_Alert)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

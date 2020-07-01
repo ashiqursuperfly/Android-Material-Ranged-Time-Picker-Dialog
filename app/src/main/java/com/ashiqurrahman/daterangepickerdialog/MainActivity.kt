@@ -12,6 +12,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val d = TimeRangePickerDialog(
+            is24HourView = true,
             onPickedTimeTime = object : TimeRangePickerDialog.OnPickedTimeRangePick {
                 override fun onPickedTime(
                     startHour: Int,
