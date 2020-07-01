@@ -15,7 +15,7 @@ import com.google.android.material.textview.MaterialTextView
 */
 
 class TimeRangePickerDialog(
-    var onPickedTimeTime: OnPickedTimeRangePick,
+    var onPickedTimeTime: OnPickedTimeRange,
     var startLabel: String = "Start",
     var endLabel: String = "End",
     var is24HourView: Boolean = false
@@ -25,7 +25,7 @@ class TimeRangePickerDialog(
     private lateinit var tabLayout: TabLayout
     private lateinit var sharedViewModel: SharedViewModel
 
-    interface OnPickedTimeRangePick {
+    interface OnPickedTimeRange {
         fun onPickedTime(startHour: Int, startMinute: Int, endHour: Int, endMinute: Int)
     }
 

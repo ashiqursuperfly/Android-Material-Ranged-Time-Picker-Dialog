@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
             startLabel = "START",
             endLabel = "END",
             is24HourView = false,
-            onPickedTimeTime = object : TimeRangePickerDialog.OnPickedTimeRangePick {
+            onPickedTimeTime = object : TimeRangePickerDialog.OnPickedTimeRange {
                 override fun onPickedTime(
                     startHour: Int,
                     startMinute: Int,
