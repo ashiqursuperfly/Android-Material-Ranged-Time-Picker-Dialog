@@ -4,11 +4,21 @@
 [![](https://jitpack.io/v/ashiqursuperfly/android-ranged-time-picker-dialog.svg)](https://jitpack.io/#ashiqursuperfly/android-ranged-time-picker-dialog)
 
 #### Setup
-- Just Make sure you are using material components in your default AppTheme i.e your AppTheme inherits from a material theme
-- In your app-level build.gradle file: (make sure you use the latest release version, this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).)
+- Make sure you are using material components in your default AppTheme i.e your AppTheme inherits from a material theme
+- In project-level build.gradle:
+```groovy
+  allprojects {
+  	repositories {
+          // ...
+          maven { url 'https://jitpack.io' }
+      }
+  }
+```
+- In your app-level build.gradle file: 
 ```groovy
 implementation 'com.github.ashiqursuperfly:android-ranged-time-picker-dialog:x.x.x'
 ```
+Make sure you use the latest release version, this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 #### Usage
 ```kotlin
 val dialog = TimeRangePickerDialog(
