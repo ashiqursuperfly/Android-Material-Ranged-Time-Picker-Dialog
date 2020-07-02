@@ -1,5 +1,4 @@
-#### material-ranged-time-picker-dialog
-<img src="ss/androidlib.jpg" height="80" width="80">
+## material-ranged-time-picker-dialog
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 [![](https://jitpack.io/v/ashiqursuperfly/android-ranged-time-picker-dialog.svg)](https://jitpack.io/#ashiqursuperfly/android-ranged-time-picker-dialog)
