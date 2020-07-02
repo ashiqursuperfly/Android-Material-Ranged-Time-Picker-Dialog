@@ -21,7 +21,7 @@
 ```
 - In your app-level build.gradle file: 
 ```groovy
-implementation 'com.github.ashiqursuperfly:android-ranged-time-picker-dialog:x.x.x'
+implementation 'com.github.ashiqursuperfly:Android-Material-Ranged-Time-Picker-Dialog:x.x.x'
 ```
 Make sure you use the latest release version, this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 #### Usage
